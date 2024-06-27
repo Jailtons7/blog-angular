@@ -15,6 +15,7 @@ export class LoginComponent {
 
   constructor(private http: HttpClient, private router: Router) {
     this.loginObj = new Login();
+    this.router = router;
   }
 
   onLogin() {
@@ -25,6 +26,7 @@ export class LoginComponent {
       next: (res: any) => {
         // set token to local storage and then navigate to the posts
         localStorage.setItem('token', res.access_token);
+        localStorage.setItem('token_expires', res.token_expires);
         this.router.navigateByUrl('/posts');
       },
       error: (err: any) => {
